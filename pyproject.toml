@@ -1,0 +1,33 @@
+[project]
+name = "whisper-annotation-tools"
+version = "0.0.1"
+description = "Transform whisper ASR and pyannote.speaker-diarization into transcript formats ready for further linguistic analysis."
+keywords = ["whiper", "pyannote", "linguistics"]
+
+readme = "README.md"
+
+authors = [
+    { name = "Vasco Alexander Sahlbach", email = "Iamreallynotateapot@gmail.com" },
+]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.12",
+]
+
+requires-python = ">=3.9"
+dependencies = []
+
+
+[project.urls]
+"Homepage" = "https://github.com/notaTeapot/whisper-annotation-tools"
+
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project.scripts]
+whisper-annotation-tools = "whisper_annotation_tools.cli:main"
