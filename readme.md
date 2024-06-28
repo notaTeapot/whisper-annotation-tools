@@ -1,3 +1,12 @@
+# Text+
+Code Release zum Vortrag "Automatische Transkription von Podcastfolgen für Korpuslinguistische Untersuchungen."
+
+- Veronika Sahlbach (https://tu-dresden.de/gsw/slk/germanistik/gls/die-professur/team-1/veronika-sahlbach)
+- Vasco Alexander Sahlbach @notaTeapot
+
+Skripte für die Whisper Automatisierung auf HPC-Sytemen: https://github.com/notaTeapot/whisper-hpc-automation
+
+
 # Whisper Annotation Tools
 
 Whisper Annotation Tools (WAT) is a set of utilities transforming whisper ASR and pyannote.speaker-diarization into transcript formats ready for further linguistic analysis.
