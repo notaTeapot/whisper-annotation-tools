@@ -1,5 +1,6 @@
 # Text+
 Code Release zum Vortrag "Automatische Transkription von Podcastfolgen für Korpuslinguistische Untersuchungen."
+Slides: https://zenodo.org/doi/10.5281/zenodo.12584114
 
 - Veronika Sahlbach (https://tu-dresden.de/gsw/slk/germanistik/gls/die-professur/team-1/veronika-sahlbach)
 - Vasco Alexander Sahlbach @notaTeapot
