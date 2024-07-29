@@ -35,13 +35,16 @@ def structure_whisper_chunks():
     raise NotImplementedError
 
 
-def structure_whisper_speakers(data: dict, prepend_time: float = 0) -> dict:
+def structure_whisper_speakers(
+    data: dict, prepend_time: float = 0, mark_pauses=False, min_pause=0.1
+) -> dict:
     """Structure whisper speaker aligned chunks into sentences and speaker aligned paragraphs.
 
     Parameters
     ----------
     data : dict
         data containing the speaker aligned segments in the key "speakers"
+    #TODO expand
 
     Returns
     -------
@@ -73,7 +76,7 @@ def structure_whisper_speakers(data: dict, prepend_time: float = 0) -> dict:
     speakers = new_speakers
 
     last_speaker = None
-    last_ts = [0, 0]
+    last_ts = 0
 
     sentence_start = None
     sentence_stop = None
@@ -85,10 +88,13 @@ def structure_whisper_speakers(data: dict, prepend_time: float = 0) -> dict:
     sentence_text = ""
 
     for element in speakers:
+        begin = False
+
         speaker = element["speaker"]
         if sentence_text == "":
             sentence_start = element["timestamp"][0]
             sentence_start_h = element["timestamp_h"][0]
+            begin = True
 
         if speaker != last_speaker and len(paragraph_sentences) != 0:
             paragraph = {
@@ -108,6 +114,21 @@ def structure_whisper_speakers(data: dict, prepend_time: float = 0) -> dict:
             # reset current paragraph
             paragraph_sentences = []
 
+        # check for pause
+        pause = element["timestamp"][0] - last_ts
+        if mark_pauses and pause >= min_pause and not begin:
+            # print(pause)
+            pause_txt = " (.)"
+            if pause >= 0.2:
+                pause_txt = " (-)"
+            if pause >= 0.5:
+                pause_txt = " (--)"
+            if pause >= 0.8:
+                pause_txt = " (---)"
+            if pause >= 1:
+                pause_txt = f" ({pause:.1f})"
+            sentence_text += pause_txt
+
         # extend current sentence
         sentence_stop = element["timestamp"][1]
         sentence_stop_h = element["timestamp_h"][1]
@@ -126,6 +147,8 @@ def structure_whisper_speakers(data: dict, prepend_time: float = 0) -> dict:
             sentence_text = ""
         # reset last speaker
         last_speaker = speaker
+        if element["timestamp"][1] is not None:
+            last_ts = element["timestamp"][1]
 
     try:
         paragraph = {

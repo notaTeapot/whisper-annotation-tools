@@ -8,8 +8,12 @@ def annotate_episode(
     prepend_time: float = 0,
     metadata: dict = None,
     audio_filename="",
+    mark_pauses=False,
+    min_pause=0.1,
 ):
-    structured_data = structure_whisper_speakers(data, prepend_time)
+    structured_data = structure_whisper_speakers(
+        data, prepend_time, mark_pauses, min_pause
+    )
 
     if output_name.endswith(".json"):
         with open(output_name, "w", encoding="utf-8") as f:
