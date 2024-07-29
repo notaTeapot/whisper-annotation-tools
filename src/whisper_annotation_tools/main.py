@@ -5,7 +5,7 @@ from .utils.structure import structure_whisper_speakers, build_xml, build_flk
 def annotate_episode(
     data: dict,
     output_name: str,
-    prepend_time: float = None,
+    prepend_time: float = 0,
     metadata: dict = None,
     audio_filename="",
 ):
@@ -13,7 +13,7 @@ def annotate_episode(
 
     if output_name.endswith(".json"):
         with open(output_name, "w", encoding="utf-8") as f:
-            json.dump(structured_data, f, indent=2)
+            json.dump(structured_data, f, indent=2, ensure_ascii=False)
 
     elif output_name.endswith(".xml"):
         build_xml(output_name, structured_data, metadata)

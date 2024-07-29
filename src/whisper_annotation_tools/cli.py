@@ -41,7 +41,7 @@ parser.add_argument(
 def main():
     args = parser.parse_args()
 
-    with open(args.file_name, "r") as f:
+    with open(args.file_name, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     if args.metadata_file is not None:
